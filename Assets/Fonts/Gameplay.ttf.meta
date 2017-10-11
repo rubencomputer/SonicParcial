@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: a5bbb9c2ef3a55e46a5f306d3d06feb9
+timeCreated: 1507765177
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 400
+  forceTextureCase: -1
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Gameplay
+  fontNames:
+  - Gameplay
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
