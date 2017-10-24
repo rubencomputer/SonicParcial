@@ -109,6 +109,8 @@ NavMeshSettings:
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
+    debug:
+      m_Flags: 0
   m_NavMeshData: {fileID: 0}
 --- !u!1001 &424390048
 Prefab:
@@ -270,7 +272,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
-  m_StereoMirrorMode: 0
 --- !u!4 &1128167516
 Transform:
   m_ObjectHideFlags: 0
@@ -295,26 +296,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c630f231588cb946a22a10954c6ece9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bloques:
-  - {fileID: 1460986530268948, guid: c5f2fa40c44c00a46b300fb43f88e1b7, type: 2}
-  - {fileID: 1160680591470432, guid: 11487a2f11d12454caa2cb0292142174, type: 2}
-  - {fileID: 1195224638640604, guid: 46b7317259301234b8ca50cf3da5b6d3, type: 2}
-  - {fileID: 1169316101332570, guid: a2c97a0a1bb8eb841ba8d83308e95fc8, type: 2}
-  Puentes:
-  - {fileID: 1345429231728842, guid: 4229a71a4a773c64ca754cb54a349935, type: 2}
-  - {fileID: 1728990005974332, guid: 93d38dc91fdabe24db245e3bef54c27f, type: 2}
-  - {fileID: 1906527869726352, guid: 776974daa5a38da49a1048b62734824f, type: 2}
-  - {fileID: 1411209423331020, guid: f7ba41d95c4833c409bb258fcd6b483a, type: 2}
-  - {fileID: 1391931210411494, guid: b72d6fac5a21e2a48b38ef56a4dd3b68, type: 2}
-  - {fileID: 1997243066523970, guid: c3e39848ac4c9f047ace8d3b3b95d811, type: 2}
-  Puenques:
-  - {fileID: 1135984935750316, guid: 9f99f0a46f3eddc41b25132f41cb3826, type: 2}
-  - {fileID: 1332608366616404, guid: e7bdceda17d680a4994b563573b98d97, type: 2}
-  Vacio: {fileID: 1440984146493050, guid: 3b9ab6caee0933d4287d7af618ee65a7, type: 2}
-  Obstaculos:
-  - {fileID: 1044425481049040, guid: b0172b8793d617c4799d13967e64fb92, type: 2}
-  - {fileID: 1149478650092200, guid: 3c5da4b317427664f93e4de11d98cde4, type: 2}
-  Items: []
+  Todo:
+  - tipoObjeto: Bloques
+    obs: []
+  - tipoObjeto: Puentes
+    obs: []
+  - tipoObjeto: Puenques
+    obs: []
+  - tipoObjeto: Obstaculos
+    obs: []
+  - tipoObjeto: Items
+    obs: []
 --- !u!1001 &1326364891
 Prefab:
   m_ObjectHideFlags: 0
@@ -486,6 +478,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -501,6 +494,7 @@ MeshRenderer:
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
