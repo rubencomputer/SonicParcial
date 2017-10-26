@@ -14,24 +14,27 @@ public class Terreno : MonoBehaviour {
 
 	public Obstaculos2[] Todo;
 
+	public Transform jugador;
 	private float dEntreBloques = 7.6175f;
-	private float escenaZ = 83.7925f;
-
+	private float startZ = 83.7925f;
+	private float spawnLeft = -4.0f;
+	private float spawnRight = 4.0f;
+	private float spawndist = 100.0f;
+	private int randomTipo;
+	private int randomPosicion;
 	// Use this for initialization
 	void Start () {
-		/*for (int i = 0; i < 10; i++) {
-			Instantiate (Bloques[3], new Vector3(0,0,dEntreBloques), Quaternion.identity);
-			dEntreBloques+=7.6175f;
-		}*/
+		Instantiate (Todo[0].obs[0], new Vector3 (0, 0, dEntreBloques), Quaternion.identity);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		/*if (escenaZ < 100) {
-			for (int i = 0; i < 5; i++) {
-				Instantiate (Bloques [3], new Vector3 (0, 0, dEntreBloques), Quaternion.identity);
-				dEntreBloques += 7.6175f;
-			}	
-		}*/
+		randomTipo = Random.Range (0, 3);
+		randomPosicion = Random.Range (0, 5);
+	}
+	void OnTriggerEnter(Collider _col)
+	{
+		Instantiate(Todo[randomTipo].obs[randomPosicion], new Vector3 (0,0,236.1425+dEntreBloques),Quaternion.identity);
+		dEntreBloques += 7.6175;
 	}
 }
