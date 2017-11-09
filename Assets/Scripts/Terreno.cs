@@ -17,7 +17,7 @@ public class Terreno : MonoBehaviour {
 
 	public  List<GameObject> poolCopia = new List<GameObject> ();
 
-	public List<Transform> posItem = new List<Transform>();
+	public List<GameObject> posItem = new List<GameObject>();
 
 	public GameObject objetos;
 	public GameObject spawnItem;
@@ -30,7 +30,7 @@ public class Terreno : MonoBehaviour {
 	private float spawndist = 100.0f;
 	private int randomTipo;
 	private int randomPosicion;
-	private int randomItem;
+	public int randomItem;
 	private int randomItemSelect;
 	public GameObject suelo;
 	// Use this for initialization
@@ -53,7 +53,12 @@ public class Terreno : MonoBehaviour {
 		randomItem = Random.Range (1, 75);
 		randomItemSelect = Random.Range (1, 100);
 		if (randomItemSelect == 30) {
+			if(spawnItem !=null)
 			Instantiate (spawnItem, posItem [randomItem].transform.position, Quaternion.identity);
+		}
+		if (randomItemSelect == 50) {
+			if (spawnItem != null)
+				posItem [randomItem].SetActive (false);
 		}
 	}
 	void OnTriggerEnter(Collider _col)
@@ -64,7 +69,14 @@ public class Terreno : MonoBehaviour {
 			print("Colision con pared");
 			GenerarSuelo ();
 			_col.gameObject.GetComponent<BoxCollider> ().enabled = false;
+			for (int i = 0; i < _col.transform.childCount-1; i++)
+			{
+				_col.transform.GetChild (i).transform.GetChild (0).GetChild (1).gameObject.SetActive (true);
+				_col.transform.GetChild (i).transform.GetChild (0).GetChild (1).gameObject.SetActive (true);
+				_col.transform.GetChild (i).transform.GetChild (0).GetChild (1).gameObject.SetActive (true);
 
+
+			}
 			_col.gameObject.SetActive (false);
 			/*
 			Instantiate(Todo[0].obs[randomTipo], new Vector3 (0,0,236.1425f+dEntreBloques),Quaternion.identity, objetos);
@@ -97,11 +109,11 @@ public class Terreno : MonoBehaviour {
 
 	public void ColectaTransforms()
 	{
-		for (int i = 0; i < suelo.transform.childCount; i++)
+		for (int i = 0; i < suelo.transform.childCount-1; i++)
 		{
-			posItem.Add(suelo.transform.GetChild(i).transform.GetChild(0).GetChild(1).transform);
-			posItem.Add(suelo.transform.GetChild(i).transform.GetChild(0).GetChild(2).transform);
-			posItem.Add(suelo.transform.GetChild(i).transform.GetChild(0).GetChild(3).transform);
+			posItem.Add(suelo.transform.GetChild(i).transform.GetChild(0).GetChild(1).gameObject);
+			posItem.Add(suelo.transform.GetChild(i).transform.GetChild(0).GetChild(2).gameObject);
+			posItem.Add(suelo.transform.GetChild(i).transform.GetChild(0).GetChild(3).gameObject);
 						
 					
 		}

@@ -9,27 +9,31 @@ public class Jugador : MonoBehaviour {
 	public int hilera = 0;
 	public bool movimiento;
 	public float velocidad = 20;
+	Rigidbody rigiPersonaje;
+	public float fuerzaSalto;
 
+
+	bool izq = false;
+	bool der = false;
+	bool centro = true;
+
+	public float fuerza;
 	// Use this for initialization
 	void Start () {
-		
+
+		rigiPersonaje = GetComponent<Rigidbody> ();
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+	{
 		
-		GetComponent<Rigidbody> ().velocity = new Vector3 (velH, 0, velocidad);
-		if ((Input.GetKeyDown (KeyCode.A) || Input.GetKeyDown (KeyCode.LeftArrow)) && (hilera>-1) && (movimiento)) {
-			movimiento = false;
-			hilera -= 1;
-			velH = -12.5f;
-			StartCoroutine (detenerMovimientoH());
-		}
-		if ((Input.GetKeyDown (KeyCode.D) || Input.GetKeyDown (KeyCode.RightArrow)) && (hilera<1) && (movimiento)) {
-			movimiento = false;
-			hilera += 1;
-			velH = 12.5f;
-			StartCoroutine (detenerMovimientoH ());
+		GetComponent<Rigidbody> ().velocity = new Vector3 (velH,GetComponent<Rigidbody> ().velocity.y , velocidad);
+
+
+		if (Input.GetKeyDown (KeyCode.Space))
+		{
+			rigiPersonaje.AddForce (Vector3.up * fuerzaSalto);
 		}
 	
 	}
