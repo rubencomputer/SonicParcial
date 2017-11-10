@@ -13,11 +13,13 @@ public class UI : MonoBehaviour {
 	SimpleCharacterControl personaje;
 	public int metros = 0;
 	public int coins = 0;
+	public SimpleCharacterControl rebun;
 	bool yatemandoAlInicio=false;
 	// Use this for initialization
 	void Start () {
 		SimpleCharacterControl.enjuego = true;
 		personaje = GameObject.FindObjectOfType<SimpleCharacterControl> ();
+		personaje.PlayAudio (7);
 	}
 	
 	// Update is called once per frame
@@ -35,6 +37,7 @@ public class UI : MonoBehaviour {
 	}
 	IEnumerator YaPerdio()
 	{
+		personaje.PlayAudio (3);
 		SimpleCharacterControl.enjuego = false;
 		yatemandoAlInicio = true;
 		yield return new WaitForSeconds (1.5f);
@@ -43,5 +46,6 @@ public class UI : MonoBehaviour {
 		yield return new WaitForSeconds (2.8f);
 		NextScene.nextScene = "Demo";
 		SceneManager.LoadScene ("LoadingScene");
+
 	}
 }
