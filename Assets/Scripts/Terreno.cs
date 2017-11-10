@@ -56,10 +56,7 @@ public class Terreno : MonoBehaviour {
 			if(spawnItem !=null)
 			Instantiate (spawnItem, posItem [randomItem].transform.position, Quaternion.identity);
 		}
-		if (randomItemSelect == 50) {
-			if (spawnItem != null)
-				posItem [randomItem].SetActive (false);
-		}
+
 	}
 	void OnTriggerEnter(Collider _col)
 	{

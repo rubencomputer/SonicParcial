@@ -27,12 +27,22 @@ public class BolaFuego : MonoBehaviour {
 
 		if (targetElegido == 3)
 			targetFinal = target3;
+
+		Destroy (gameObject, 2.5f);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-		transform.position = Vector3.Lerp(transform.position, targetFinal.position,9);
+		transform.position = Vector3.Lerp(transform.position, targetFinal.position,4.0f*Time.deltaTime);
 		
+	}
+
+
+	void OnCollisionEnter (Collision _col)
+	{
+		if (_col.gameObject.CompareTag ("Player")) 
+		{
+ 		}
 	}
 }
