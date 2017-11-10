@@ -21,6 +21,11 @@ public class Terreno : MonoBehaviour {
 
 	public GameObject objetos;
 	public GameObject spawnItem;
+	public GameObject PALMERA;
+	public GameObject BOMBA;
+	public GameObject COIN;
+	public GameObject CORAZON;
+
 	public static Transform jugador;
 	public static float dEntreBloques = 0f;
 	private float startZ = 83.7925f;
@@ -34,8 +39,10 @@ public class Terreno : MonoBehaviour {
 	private int randomItemSelect;
 	public GameObject suelo;
 	// Use this for initialization
-	void Start () {
 
+	SimpleCharacterControl jugadorStats;
+	void Start () {
+		jugadorStats = GameObject.FindObjectOfType<SimpleCharacterControl> ();
 		pool.Add (suelo); 
 		pool.Add (suelo); 
 		pool.Add (suelo);
@@ -54,7 +61,31 @@ public class Terreno : MonoBehaviour {
 		randomItemSelect = Random.Range (1, 100);
 		if (randomItemSelect == 30) {
 			if(spawnItem !=null)
-			Instantiate (spawnItem, posItem [randomItem].transform.position, Quaternion.identity);
+				Instantiate (spawnItem,  new Vector3(posItem [randomItem].transform.position.x ,posItem [randomItem].transform.position.x,posItem [randomItem].transform.position.z+50), Quaternion.identity);
+		}
+
+		if (randomItemSelect == 1) {
+			if(spawnItem !=null)
+				Instantiate (PALMERA, new Vector3(posItem [randomItem].transform.position.x-30 ,-5,posItem [randomItem].transform.position.z+50), Quaternion.identity);
+		}
+
+		if (randomItemSelect == 2) {
+			if(spawnItem !=null)
+				Instantiate (PALMERA, new Vector3(posItem [randomItem].transform.position.x+30 ,-5,posItem [randomItem].transform.position.z+50), Quaternion.identity);
+		}
+
+		if (randomItemSelect == 50) {
+			if(spawnItem !=null)
+				Instantiate (BOMBA, new Vector3(posItem [randomItem].transform.position.x ,posItem [randomItem].transform.position.y+1,posItem [randomItem].transform.position.z+50), Quaternion.identity);
+		}
+		if (randomItemSelect == 60) {
+			if(spawnItem !=null)
+				Instantiate (COIN, new Vector3(posItem [randomItem].transform.position.x ,posItem [randomItem].transform.position.y+1,posItem [randomItem].transform.position.z+50), Quaternion.identity);
+		}
+
+		if (randomItemSelect == 99 && jugadorStats.vidas < 3) {
+			if(spawnItem !=null)
+				Instantiate (CORAZON, new Vector3(posItem [randomItem].transform.position.x ,posItem [randomItem].transform.position.y+1,posItem [randomItem].transform.position.z+50), Quaternion.identity);
 		}
 
 	}

@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using System;
+using System.Collections;
 
 public class SimpleCharacterControl : MonoBehaviour {
 
@@ -9,7 +11,10 @@ public class SimpleCharacterControl : MonoBehaviour {
         Tank,
         Direct
     }
-	public bool enjuego=false;
+	public static bool enjuego=false;
+	public GameObject[] vidasUI;
+
+	UI jugadorStats;
     [SerializeField] private float m_moveSpeed = 2;
     [SerializeField] private float m_turnSpeed = 200;
     [SerializeField] private float m_jumpForce = 4;
@@ -35,6 +40,9 @@ public class SimpleCharacterControl : MonoBehaviour {
     private bool m_isGrounded;
     private List<Collider> m_collisions = new List<Collider>();
 
+	public int vidas = 3;
+
+
     private void OnCollisionEnter(Collision collision)
     {
         ContactPoint[] contactPoints = collision.contacts;
@@ -48,6 +56,33 @@ public class SimpleCharacterControl : MonoBehaviour {
                 m_isGrounded = true;
             }
         }
+
+		if (collision.gameObject.CompareTag ("Fuego")) 
+		{
+			collision.gameObject.GetComponent<SphereCollider> ().enabled = false;
+			if(vidas > 0)
+			vidas -= 1;
+		}
+
+		if (collision.gameObject.CompareTag ("Bomb")) 
+		{
+			collision.gameObject.GetComponent<Bomba> ().enabled = true;
+		}
+
+		if (collision.gameObject.CompareTag ("Moneda")) 
+		{
+			jugadorStats = GameObject.FindObjectOfType<UI> ();
+			jugadorStats.coins += 1; 
+			Destroy (collision.gameObject);
+		}
+
+		if (collision.gameObject.CompareTag ("Vida")) 
+		{
+			jugadorStats = GameObject.FindObjectOfType<UI> ();
+			if(vidas <3)
+			vidas += 1;
+			Destroy (collision.gameObject);
+		}
     }
 
     private void OnCollisionStay(Collision collision)
@@ -89,6 +124,47 @@ public class SimpleCharacterControl : MonoBehaviour {
     }
 
 	void Update () {
+		print ("Vidas " + vidas.ToString());
+		if (enjuego)
+		{
+			if (vidas == 3) 
+			{
+				if(vidasUI[0]!= null)
+					vidasUI [0].SetActive (true);
+				if(vidasUI[1]!= null)
+					vidasUI [1].SetActive (true);
+				if(vidasUI[2]!= null)
+					vidasUI [2].SetActive (true);
+			}
+			if (vidas == 2) 
+			{			
+				if(vidasUI[0]!= null)
+					vidasUI [0].SetActive (true);
+				if(vidasUI[1]!= null)
+					vidasUI [1].SetActive (true);
+				if(vidasUI[2]!= null)
+					vidasUI [2].SetActive (false);
+			}
+			if (vidas == 1) 
+			{
+				if(vidasUI[0]!= null)
+					vidasUI [0].SetActive (true);
+				if(vidasUI[1]!= null)
+					vidasUI [1].SetActive (false);
+				if(vidasUI[2]!= null)
+					vidasUI [2].SetActive (false);
+			}
+			if (vidas == 0) 
+			{			if(vidasUI[0]!= null)
+				vidasUI [0].SetActive (false);
+				if(vidasUI[1]!= null)
+					vidasUI [1].SetActive (false);
+				if(vidasUI[2]!= null)
+					vidasUI [2].SetActive (false);
+			}
+
+		}
+
 
 		if(enjuego) ChecaMovimiento ();
         m_animator.SetBool("Grounded", m_isGrounded);
@@ -204,7 +280,7 @@ public class SimpleCharacterControl : MonoBehaviour {
 			entrar.SetActive (true);
 			if (Input.GetKeyDown (KeyCode.X)) 
 			{
-				SceneManager.LoadScene ("LoadingScene");
+				StartCoroutine (teletransporta());
 			}
 		}
 	}
@@ -247,4 +323,16 @@ public class SimpleCharacterControl : MonoBehaviour {
 			estaIzquierda = false;
 		}
 	}
+
+	IEnumerator teletransporta()
+	{
+		Enemigo.enemigovivo = true;
+		Terreno.pool.Clear ();
+		GameObject.FindObjectOfType<Flotacion> ().enabled = true;
+		NextScene.nextScene = "Test";
+		yield return new WaitForSeconds (1.5f);
+		SceneManager.LoadScene ("LoadingScene");
+
+	}
+
 }

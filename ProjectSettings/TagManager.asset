@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Item
   - Door
+  - Bomb
+  - Fuego
+  - Enemigo
+  - Moneda
+  - Vida
   layers:
   - Default
   - TransparentFX

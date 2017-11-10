@@ -13,7 +13,6 @@ public class Jugador : MonoBehaviour {
 	public float fuerzaSalto;
 
 
-
 	public float fuerza;
 	// Use this for initialization
 	void Start () {
@@ -26,23 +25,7 @@ public class Jugador : MonoBehaviour {
 	{
 		
 		GetComponent<Rigidbody> ().velocity = new Vector3 (velH,GetComponent<Rigidbody> ().velocity.y , velocidad);
-		float vertical = 1.0f;
 
-
-		/*
-		if ((Input.GetKeyDown (KeyCode.A) || Input.GetKeyDown (KeyCode.LeftArrow)) && (hilera>-1) && (movimiento)) {
-			movimiento = false;
-			hilera -= 1;
-			velH = -12.5f;
-			StartCoroutine (detenerMovimientoH());
-		}
-		if ((Input.GetKeyDown (KeyCode.D) || Input.GetKeyDown (KeyCode.RightArrow)) && (hilera<1) && (movimiento)) {
-			movimiento = false;
-			hilera += 1;
-			velH = 12.5f;
-			StartCoroutine (detenerMovimientoH ());
-		}
-		*/
 
 		if (Input.GetKeyDown (KeyCode.Space))
 		{
