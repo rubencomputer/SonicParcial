@@ -42,6 +42,15 @@ public class SimpleCharacterControl : MonoBehaviour {
 
 	public int vidas = 3;
 
+	public AudioClip[] sonidos;
+
+
+	public void PlayAudio(int sonido)
+	{
+		AudioSource audiosurs = GetComponent<AudioSource> ();
+		audiosurs.clip = sonidos[sonido];
+		audiosurs.PlayOneShot(audiosurs.clip);
+	}
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -62,11 +71,13 @@ public class SimpleCharacterControl : MonoBehaviour {
 			collision.gameObject.GetComponent<SphereCollider> ().enabled = false;
 			if(vidas > 0)
 			vidas -= 1;
+			PlayAudio(1);
 		}
 
 		if (collision.gameObject.CompareTag ("Bomb")) 
 		{
 			collision.gameObject.GetComponent<Bomba> ().enabled = true;
+			PlayAudio(5);
 		}
 
 		if (collision.gameObject.CompareTag ("Moneda")) 
@@ -74,6 +85,7 @@ public class SimpleCharacterControl : MonoBehaviour {
 			jugadorStats = GameObject.FindObjectOfType<UI> ();
 			jugadorStats.coins += 1; 
 			Destroy (collision.gameObject);
+			PlayAudio(0);
 		}
 
 		if (collision.gameObject.CompareTag ("Vida")) 
@@ -82,6 +94,7 @@ public class SimpleCharacterControl : MonoBehaviour {
 			if(vidas <3)
 			vidas += 1;
 			Destroy (collision.gameObject);
+			PlayAudio(6);
 		}
     }
 
